@@ -69,10 +69,10 @@ class FxRatesTransformer extends BaseTransformer {
 
       let transformedData = objectMapper(dataRow, map);
       if (this.errorMessages && this.errorMessages.length > 0) {
-        return this.generateError(this.errorMessages);
+        return this.sendTransformedData(this.status.FAILED, 'Transformation failed', null, this.errorMessages);
+        // return this.generateError(this.errorMessages);
       }
-      return transformedData;
-
+      return this.sendTransformedData(this.status.SUCCESS, 'Transformation Success', transformedData, this.errorMessages);
     } catch (exception) {
       console.error(exception);
       throw this.toGenericError(exception)

@@ -6,6 +6,8 @@ const ExceptionCategory = require('../model/ExceptionCategory');
 const STATUS = Object.freeze({ SUCCESS: "SUCCESS", FAILED: "FAILED", SKIPPED: "SKIPPED" });
 
 
+
+
 /**
  * Base Transformer Class, this will be extended in interface specific transformers and `transform` method will be overriden .
  * 
@@ -17,6 +19,9 @@ class BaseTransformer {
     constructor() {
         this.errorMessages = [];
 
+    }
+    get utils() {
+        return
     }
 
     get status() {
@@ -37,14 +42,18 @@ class BaseTransformer {
 
 
     sendTransformedData(status, message, data, errors) {
-        return {
-            status: status,
-            message: message,
-            data: data,
-            errors: errors
+        if (errors && errors.length > 0) {
+            return generateError(errors);
+        }
+        else {
+            return {
+                status: status,
+                message: message,
+                data: data,
+                errors: errors
+            }
         }
     }
-
 
     toGenericError(exception) {
         if (!(exception instanceof GenericException)) {
@@ -57,15 +66,14 @@ class BaseTransformer {
             throw exception;
         }
     }
+}
 
-    generateError(errorMessages) {
-        throw new GenericException.Builder(ExceptionType.TRANSFORMATION_FAILED)
-            .withReason(errorMessages)
-            .withMessage('Transformation failed, check reason property!')
-            .withExceptionCategory(ExceptionCategory.TRANSFORMATION_ERROR)
-            .withInspectionFields()
-            .build();
-    }
-
+function generateError(errorMessages) {
+    throw new GenericException.Builder(ExceptionType.TRANSFORMATION_FAILED)
+        .withReason(errorMessages)
+        .withMessage('Transformation failed, check reason property!')
+        .withExceptionCategory(ExceptionCategory.TRANSFORMATION_ERROR)
+        .withInspectionFields()
+        .build();
 }
 module.exports = BaseTransformer;

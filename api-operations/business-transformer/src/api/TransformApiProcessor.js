@@ -16,7 +16,7 @@ class TransformApiProcessor {
             const requestDto = new RequestDto(event.data, event.transformers, event.jobDetails, event.traceFields);
             const requestBo = await BoDtoTransformer.transformToBo(requestDto);
             const responseBo = await transformerService.process(requestBo);
-            const responseDto = await BoDtoTransformer.transformToDto('success', 'Transformation Successful', responseBo.toJson());
+            const responseDto = await BoDtoTransformer.transformToDto(responseBo);
             return responseDto.toJson();
 
         } catch (exception) {

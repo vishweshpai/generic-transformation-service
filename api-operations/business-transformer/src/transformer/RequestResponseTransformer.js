@@ -12,8 +12,8 @@ class RequestResponseTransformer {
         return new RequestBo(requestDto.data, requestDto.transformationRules, requestDto.jobDetails, requestDto.traceFields);
     }
 
-    static async transformToDto(status, message, responseBo) {
-        return new ResponseDto(status, message, responseBo);
+    static async transformToDto(responseBo) {
+        return new ResponseDto(responseBo.response.status, responseBo.response.message, responseBo.response.data);
     }
 }
 

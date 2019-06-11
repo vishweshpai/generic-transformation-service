@@ -68,51 +68,51 @@ class Transformer extends BaseTransformer {
                 "14": {
                     key: "txPeriod?"
                 },
-                "jobDetail.fileName": [
-                    {
-                        key: "txCurrency01",
-                        transform: (value) => {
-                            let res = undefined;
-                            try {
-                                res = value.substring(4, 7);
-                                if (res.length < 3) {
-                                    throw new Error("Invalid data being mapped to txCurrency01");
-                                }
-                                return res;
-                            } catch (ex) {
-                                console.log(ex.message);
-                                this.addErrorMessage(`Key: txCurrency01, ${Messages.INVALID_FILENAME}`)
-                            }
-                        }
-                    },
-                    {
-                        key: "txDate01",
-                        transform: (value) => {
-                            let res = undefined;
-                            try {
-                                res = value.substring(7, 13);
-                                if (res.length < 6) {
-                                    throw new Error("Invalid data being mapped to txDate01");
-                                }
-                                return res;
-                            } catch (ex) {
-                                console.log(ex.message);
-                                this.addErrorMessage(`Key: txDate01, ${Messages.INVALID_FILENAME}`)
-                            }
-                        }
-                    },
-                    {
-                        key: "txComment03",
-                        transform: (value) => {
-                            try {
-                                return value;
-                            } catch (ex) {
-                                console.log(ex.message);
-                                this.addErrorMessage(`Key: txComment03, ${Messages.INVALID_FILENAME}`)
-                            }
-                        }
-                    }
-                ],
+                // "jobDetails.fileName": [
+                //     // {
+                //     //     key: "txCurrency01",
+                //     //     transform: (value) => {
+                //     //         let res = undefined;
+                //     //         try {
+                //     //             res = value.substring(4, 7);
+                //     //             if (res.length < 3) {
+                //     //               //  throw new Error("Invalid data being mapped to txCurrency01");
+                //     //             }
+                //     //             return res;
+                //     //         } catch (ex) {
+                //     //             console.error(ex.message);
+                //     //             this.addErrorMessage(`Key: txCurrency01, ${Messages.INVALID_FILENAME}`)
+                //     //         }
+                //     //     }
+                //     // },
+                //     {
+                //         key: "txDate01",
+                //         transform: (value) => {
+                //             let res = undefined;
+                //             try {
+                //                 res = value.substring(7, 13);
+                //                 if (res.length < 6) {
+                //                     throw new Error("Invalid data being mapped to txDate01");
+                //                 }
+                //                 return res;
+                //             } catch (ex) {
+                //                 console.log(ex.message);
+                //                 this.addErrorMessage(`Key: txDate01, ${Messages.INVALID_FILENAME}`)
+                //             }
+                //         }
+                //     },
+                //     {
+                //         key: "txComment03",
+                //         transform: (value) => {
+                //             try {
+                //                 return value;
+                //             } catch (ex) {
+                //                 console.log(ex.message);
+                //                 this.addErrorMessage(`Key: txComment03, ${Messages.INVALID_FILENAME}`)
+                //             }
+                //         }
+                //     }
+                // ],
                 "currency": {
                     key: "txCurrency02",
                     transform: (value) => {
@@ -379,9 +379,10 @@ class Transformer extends BaseTransformer {
 
             let transformedData = objectMapper(dataRow, map);
             if (this.errorMessages && this.errorMessages.length > 0) {
-                return this.generateError(this.errorMessages);
+                return this.sendTransformedData(this.status.FAILED, 'Transformation failed', null, this.errorMessages);
+                // return this.generateError(this.errorMessages);
             }
-            return this.tr;
+            return this.sendTransformedData(this.status.SUCCESS, 'Transformation Success', transformedData, this.errorMessages);
         } catch (exception) {
             console.error(exception);
             throw this.toGenericError(exception)
