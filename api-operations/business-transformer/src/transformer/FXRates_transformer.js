@@ -8,7 +8,7 @@ const Messages = {
 
 class FxRatesTransformer extends BaseTransformer {
 
-  async transform(dataRow, interfaceConfig, ...args) {
+  async transform(dataRow, jobDetails, interfaceConfig, traceFields) {
     try {
       let map = {
         "currency": {

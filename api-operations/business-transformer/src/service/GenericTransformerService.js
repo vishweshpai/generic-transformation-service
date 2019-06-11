@@ -7,7 +7,7 @@ const ExceptionCategory = require('../model/ExceptionCategory');
 const ResponseBo = require('../model/ResponseBo');
 
 const generictransformerDao = require('../dal/RequestDao');
-//const transformer = require('../transformer/FXRates_transformer');
+const transformer = require('../transformer/transfomer-01');
 
 //let businessValidator = require('../transformer/BusinessRuleValidator');
 
@@ -23,12 +23,11 @@ class GenericTransformerService {
         try {
             let response = '';
             response = await Promise.all(requestBo.transformationRules.map(async rule => {
-                let readStream = await this.readStream(requestBo.jobDetails.bucket, rule.key);
+                let readStream = await this.readStream(requestBo.jobDetails.bucketName, rule.key);
                 let transformer = this.evalStream(readStream.toString());
                 return await transformer.transform(requestBo.data);
             }));
             if (response && response.length > 1 && (response.length == requestBo.transformationRules.length)) {
-                console.log(response)
                 return new ResponseBo(response[0]);
             } else {
                 return new ResponseBo(response);
@@ -56,6 +55,7 @@ class GenericTransformerService {
             console.error(ex);
             throw new GenericException.Builder(ExceptionType.ERROR_WHILE_READINGFILE)
                 .withWrappedException(ex)
+                .withMessage(ex.message)
                 .build()
         }
     }
@@ -67,6 +67,7 @@ class GenericTransformerService {
             console.error(ex);
             throw new GenericException.Builder(ExceptionType.ERROR_WHILE_EVALUATING_FILE)
                 .withWrappedException(ex)
+                .withMessage(ex.message)
                 .build()
         }
     }

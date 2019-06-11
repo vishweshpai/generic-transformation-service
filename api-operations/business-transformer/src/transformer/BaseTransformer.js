@@ -3,6 +3,9 @@ const GenericException = require('generic-exception').GenericException;
 const ExceptionType = require('../model/ExceptionType');
 const ExceptionCategory = require('../model/ExceptionCategory');
 
+const STATUS = Object.freeze({ SUCCESS: "SUCCESS", FAILED: "FAILED", SKIPPED: "SKIPPED" });
+
+
 /**
  * Base Transformer Class, this will be extended in interface specific transformers and `transform` method will be overriden .
  * 
@@ -13,14 +16,18 @@ class BaseTransformer {
      */
     constructor() {
         this.errorMessages = [];
+
     }
 
+    get status() {
+        return STATUS;
+    }
     /**
      * Transforms the data as per mapper
      * @param {JSON} data  JSON data
     *  It transforms the data based on transformer file
      */
-    transform(data, interfaceConfig, ...args) { }
+    transform(dataRow, jobDetails, interfaceConfig, traceFields) { }
 
 
     addErrorMessage(_message) {
@@ -28,13 +35,16 @@ class BaseTransformer {
             this.errorMessages.push({ errorMessage: _message });
     }
 
-    skipTransformation() {
 
+    sendTransformedData(status, message, data, errors) {
+        return {
+            status: status,
+            message: message,
+            data: data,
+            errors: errors
+        }
     }
 
-    failedTransformation() {
-
-    }
 
     toGenericError(exception) {
         if (!(exception instanceof GenericException)) {

@@ -11,6 +11,7 @@ module.exports.handle = function (event, context, callback) {
             body: JSON.stringify(body)
         })
     }).catch(error => {
+        console.error('Handler', error)
         callback(null, {
             statusCode: error.httpStatusCode,
             body: JSON.stringify({
