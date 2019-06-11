@@ -1,13 +1,13 @@
 'use strict';
 const objectMapper = require('object-mapper');
-const BaseTransformer = require('../transformer/BaseTransformer');
+const BaseTransformer = require('./BaseTransformer');
 
 class IT2RSDataTransformer extends BaseTransformer {
 
   transform(dataRow, jobDetails, interfaceConfig, traceFields) {
     try {
-            dataRow.ifName = jobDetails.interfaceName
-            dataRow.fileNameOnly = jobDetails.fileName
+            dataRow.ifName = jobDetails.interfaceName;
+            dataRow.fileNameOnly = jobDetails.fileName;
             let transformedData = objectMapper(dataRow, this.mapToCodaAttributes());
             if (this.errorMessages && this.errorMessages.length > 0) {
               return this.sendTransformedData(this.status.FAILED, 'Transformation failed', null, this.errorMessages);
