@@ -1,6 +1,6 @@
 'use strict';
 const objectMapper = require('object-mapper');
-const BaseTransformer = require('./BaseTransformer');
+const BaseTransformer = require('../transformer/BaseTransformer');
 
 class IT2RSDataTransformer extends BaseTransformer {
 
@@ -49,19 +49,19 @@ class IT2RSDataTransformer extends BaseTransformer {
         key: 'txType05?',
         transform: (value) => { return value; }
       }, 'journalReference': {
-        key: 'txtNo01?',
+        key: 'txNo01?',
         transform: (value) => { return value; }
-      }, 'txtNo02': {
-        key: 'txtNo02?',
+      }, 'txNo02': {
+        key: 'txNo02?',
         transform: (value) => { return value; }
       }, 'debitCreditFlag': {
-        key: 'txtNo03?',
+        key: 'txNo03?',
         transform: (value) => { return value; }
-      }, 'txtNo04': {
-        key: 'txtNo04?',
+      }, 'txNo04': {
+        key: 'txNo04?',
         transform: (value) => { return value; }
-      }, 'txtNo05': {
-        key: 'txtNo05?',
+      }, 'txNo05': {
+        key: 'txNo05?',
         transform: (value) => { return value; }
       }, 'accountingPeriodCode': [
         {

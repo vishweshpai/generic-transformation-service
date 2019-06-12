@@ -10,8 +10,12 @@
     "mochawesome": "^3.1.1"
   },
   "scripts": {
-    "component-test-execute": "mocha ./component-test/*.js --reporter mochawesome --reporter-options reportDir=./component-test-results,reportFilename=component-test-report.html,code=false,autoOpen=false"
+    "component-test-execute": "mocha ./component-test/*.js --reporter mochawesome --reporter-options reportDir=./component-test-results,reportFilename=component-test-report.html,code=false,autoOpen=false",
+    "test": "jest"
   },
   "author": "Pravin Surve",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }

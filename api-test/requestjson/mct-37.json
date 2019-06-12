@@ -1,0 +1,44 @@
+{
+	"data": {
+		"journalReference": "JL00330494",
+		"journalAccountCompany": "GBFCS",
+		"accountingPeriodCode": "201708",
+		"originalCurrency": "GBP",
+		"eventDate": "23/08/2017",
+		"GLAccountName": "151010#",
+		"postedAmount": "13445.65",
+		"ledgerAccountCurrencyCode": "GBP",
+		"accountFXRate": "1",
+		"accountAmount": "13445.65",
+		"overallAccountingCurrency": "GBP",
+		"overallFXRate": "1",
+		"overallAmount": "13445.65",
+		"debitCreditFlag": "D",
+		"transactionCounterparty": "TREASURY",
+		"transactionReference": "FTR030926#",
+		"bookCode": "POSTING",
+		"postingAccountName": "Far principal",
+		"ledgerAccountName": "ICO-FOREIGNCOIN",
+		"MIDASreference": ""
+	},
+	"transformers": [
+		"jo_CODA_0000_controlJobIT2TRSFile-transformer-1.js"
+	],
+	"jobDetails": {
+		"bucketName": "tvx-middleware-dev",
+		"domain": "finance",
+		"interfaceName": "it2rs",
+		"jobName": "jo_CODA_0000_controlJobIT2TRSFile",
+		"fileName": "testing_job2.csv"
+	},
+	"traceFields": [
+		{
+			"name": "totalRecords",
+			"value": "totalRecordsValue"
+		},
+		{
+			"name": "recordNumber",
+			"value": "recordNumberValue"
+		}
+	]
+}
