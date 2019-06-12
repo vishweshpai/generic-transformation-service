@@ -8,6 +8,7 @@
     },
     "dependencies": {
         "aws-sdk": "^2.469.0",
+        "date-and-time": "^0.7.0",
         "generic-exception": "git+https://github.com/MukeshTravelex/generic-exception.git",
         "object-mapper": "^5.0.0"
     },

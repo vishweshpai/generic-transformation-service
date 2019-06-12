@@ -25,6 +25,7 @@ class RequestBo {
                 //let fileName = `interfaces/transformers/${this.jobDetails.domain}/${_transformationRules[i]}`;
                 transformationRules.push({ file: _transformationRules[i], key: fileName })
             };
+            console.log(transformationRules)
         } else {
             console.log('No transformations rules defined')
         }

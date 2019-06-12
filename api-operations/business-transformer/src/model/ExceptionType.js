@@ -1,13 +1,10 @@
 'use strict';
 let ExceptionType = {
     // Example: 
-    'MISSING_CURRENCY': 'missingCurrency',
-    'MISSING_FILENAME': 'missingFilename',
-    'MISSING_RATE': 'missingRate',
+    "MISSING_FILE_ROW_DATA": "missingFileRowData",
     'TRANSFORMATION_FAILED': 'transformationError',
-    'MISSING_FILE_ROW_DATA': 'missingFileRowData',
-    'MISSING_CURRENCY': 'missingCurrency',
-    'MISSING_RATE': 'missingRate',
+    'MISSING_JOB_DETAILS': 'missingJobDetails',
+    "MISSING_TRACE_FIELDS":"missingTraceFields",
     'UNKNOWN_ERROR': 'unknownError',
     "ERROR_WHILE_VALIDATION": 'errorWhileValidation',
     "ERROR_WHILE_READINGFILE": 'errorWhileReadingFile',

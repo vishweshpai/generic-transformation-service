@@ -14,10 +14,14 @@ class GenericTransformerDao {
                 s3.getObject(params)
                     .createReadStream()
                     .on('data', data => {
+                       // console.log('@@@@@@@@@@', data)
                         resolve(data);
                     })
                     .on('error', error => {
                         reject(error)
+                    })
+                    .on('end', () => {
+
                     });
             })
         } catch (e) {

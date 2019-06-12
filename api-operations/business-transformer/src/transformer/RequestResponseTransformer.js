@@ -2,14 +2,18 @@
 
 let ResponseDto = require('../model/ResponseDto');
 let RequestBo = require('../model/RequestBo');
-let ResponseBo = require('../model/ResponseBo');
 
-let generictransformerValidator = require('./genericTransformerValidator');
+let requestValidator = require('./RequestValidator');
 
 class RequestResponseTransformer {
 
     static async transformToBo(requestDto) {
-        return new RequestBo(requestDto.data, requestDto.transformationRules, requestDto.jobDetails, requestDto.traceFields);
+        try {
+           // let requestDto = requestValidator.validate(_requestDto);
+            return new RequestBo(requestDto.data, requestDto.transformationRules, requestDto.jobDetails, requestDto.traceFields);
+        } catch (ex) {
+            throw ex;
+        }
     }
 
     static async transformToDto(responseBo) {

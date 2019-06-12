@@ -9,7 +9,6 @@ const ResponseBo = require('../model/ResponseBo');
 const generictransformerDao = require('../dal/RequestDao');
 //const transformer = require('../transformer/transfomer-01');
 
-//let businessValidator = require('../transformer/BusinessRuleValidator');
 
 
 class GenericTransformerService {
@@ -21,18 +20,19 @@ class GenericTransformerService {
      */
     async process(requestBo) {
         try {
-            let response = '';
-            response = await Promise.all(requestBo.transformationRules.map(async rule => {
+            let response = await Promise.all(requestBo.transformationRules.map(async rule => {
                 let readStream = await this.readStream(requestBo.jobDetails.bucketName, rule.key);
                 let transformer = await this.evalStream(readStream.toString());
                 return await transformer.transform(requestBo.data, requestBo.jobDetails, null, requestBo.traceFields);
             }));
+
             if (response && response.length > 1 && (response.length == requestBo.transformationRules.length)) {
                 return new ResponseBo(response[0]);
             } else {
                 return new ResponseBo(response[0]);
             }
         } catch (exception) {
+            console.log(exception)
             if (!(exception instanceof GenericException)) {
                 throw new GenericException.Builder(ExceptionType.ERROR_WHILE_VALIDATION)
                     .withInspectionFields(', File row must be provided')
@@ -62,6 +62,7 @@ class GenericTransformerService {
 
     async evalStream(stream) {
         try {
+            // console.log('', stream)
             return eval(stream);
         } catch (ex) {
             console.error(ex);

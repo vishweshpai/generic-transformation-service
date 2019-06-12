@@ -5,8 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "api-test": "file:../api-test",
-    "winston_wrapper": "git+https://github.com/siddhirajpantoji/testLogger.git",
-    "business-transformer": "file:../api-operations/business-transformer"
+    "business-transformer": "file:../api-operations/business-transformer",
+    "winston-wrapper": "git+https://github.com/siddhirajpantoji/testLogger.git",
+    "winston_wrapper": "git+https://github.com/siddhirajpantoji/testLogger.git"
   },
   "directories": {
     "lib": "./configs"
