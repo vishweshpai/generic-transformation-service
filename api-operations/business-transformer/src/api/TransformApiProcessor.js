@@ -7,13 +7,13 @@ const ExceptionType = require('../model/ExceptionType');
 const transformerService = require('../service/GenericTransformerService');
 const BoDtoTransformer = require('../transformer/RequestResponseTransformer');
 
-const logger = require('../../../../serverless/node_modules/winston-wrapper').getLogger('generic-transformer-api');
+//const logger = require('../../../../serverless/node_modules/winston-wrapper').getLogger('generic-transformer-api');
 
 class TransformApiProcessor {
     async process(event, context) {
         try {
             if (event.body) { event = JSON.parse(event.body) }
-            logger.debug('Processing request..', JSON.stringify(event));
+            //logger.debug('Processing request..', JSON.stringify(event));
             const requestDto = new RequestDto(event.data, event.transformers, event.jobDetails, event.traceFields);
             const requestBo = await BoDtoTransformer.transformToBo(requestDto);
             const responseBo = await transformerService.process(requestBo);
@@ -21,7 +21,8 @@ class TransformApiProcessor {
             //logger.info(responseDto.status)
             return responseDto.toJson();
         } catch (exception) {
-            logger.error(`Error occurred:  ${exception.message}`);
+            console.log('Error', exception);
+            //logger.error(`Error occurred:  ${exception.message}`);
             if (!(exception instanceof GenericException)) {
                 throw new GenericException.Builder(ExceptionType.UNKNOWN_ERROR)
                     .withWrappedException(exception)
