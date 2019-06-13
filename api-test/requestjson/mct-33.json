@@ -9,8 +9,8 @@
     "jobDetails": {
       "bucketName": "tvx-middleware-dev",
       "domain": "finance",
-      "interfaceName": "fxrates",
-      "jobName": "jo_code_0000_controljobfxratesfile",
+      "interfaceName": "fx-rates",
+      "jobName": "fx-rates",
       "fileName": "orders28052018-160312.csv"
     },
     "traceFields": [

@@ -6,12 +6,12 @@ class IT2RSDataTransformer extends BaseTransformer {
 
   transform(dataRow, jobDetails, interfaceConfig, traceFields) {
     try {
-            dataRow.ifName = jobDetails.interfaceName;
-            dataRow.fileNameOnly = jobDetails.fileName;
-            let transformedData = objectMapper(dataRow, this.mapToCodaAttributes());
-            if (this.errorMessages && this.errorMessages.length > 0) {
-              return this.sendTransformedData(this.status.FAILED, 'Transformation failed', null, this.errorMessages);
-            }
+      dataRow.ifName = jobDetails.interfaceName;
+      dataRow.fileNameOnly = jobDetails.fileName;
+      let transformedData = objectMapper(dataRow, this.mapToCodaAttributes());
+      if (this.errorMessages && this.errorMessages.length > 0) {
+        return this.sendTransformedData(this.status.FAILED, 'Transformation failed', null, this.errorMessages);
+      }
       return this.sendTransformedData(this.status.SUCCESS, 'Transformation Success', transformedData, this.errorMessages);
     } catch (exception) {
       console.error(exception);
@@ -21,49 +21,21 @@ class IT2RSDataTransformer extends BaseTransformer {
 
   mapToCodaAttributes() {
     let map = {
-      'lineID': {
-        key: 'lineID?',
-        transform: (value) => { return value; }
-      }, 'ifName': {
-        key: 'ifName?',
-        transform: (value) => { return value; }
-      }, 'ifNo': {
-        key: 'ifNo?',
-        transform: (value) => { return value; }
-      }, 'journalAccountCompany': {
-        key: 'company',
-        transform: (value) => { return value; }
-      }, 'txType01': {
-        key: 'txType01?',
-        transform: (value) => { return value; }
-      }, 'txType02': {
-        key: 'txType02?',
-        transform: (value) => { return value; }
-      }, 'txType03': {
-        key: 'txType03?',
-        transform: (value) => { return value; }
-      }, 'txType04': {
-        key: 'txType04?',
-        transform: (value) => { return value; }
-      }, 'txType05': {
-        key: 'txType05?',
-        transform: (value) => { return value; }
-      }, 'journalReference': {
-        key: 'txNo01?',
-        transform: (value) => { return value; }
-      }, 'txNo02': {
-        key: 'txNo02?',
-        transform: (value) => { return value; }
-      }, 'debitCreditFlag': {
-        key: 'txNo03?',
-        transform: (value) => { return value; }
-      }, 'txNo04': {
-        key: 'txNo04?',
-        transform: (value) => { return value; }
-      }, 'txNo05': {
-        key: 'txNo05?',
-        transform: (value) => { return value; }
-      }, 'accountingPeriodCode': [
+      'lineID': 'lineID?',
+      'ifName': 'ifName?',
+      'ifNo': 'ifNo?',
+      'journalAccountCompany': 'company',
+      'txType01': 'txType01?',
+      'txType02': 'txType02?',
+      'txType03': 'txType03?',
+      'txType04': 'txType04?',
+      'txType05': 'txType05?',
+      'journalReference': 'txNo01?',
+      'txNo02': 'txNo02?',
+      'debitCreditFlag': 'txNo03?',
+      'txNo04': 'txNo04?',
+      'txNo05': 'txNo05?',
+      'accountingPeriodCode': [
         {
           key: 'txYear',
           transform: (value) => {
@@ -75,264 +47,91 @@ class IT2RSDataTransformer extends BaseTransformer {
             return value == null ? null : value % 100;
           }
         }
-      ], 'ledgerAccountCurrencyCode': {
-        key: 'txCurrency01?',
-        transform: (value) => { return value; }
-      }, 'txCurrency02': {
-        key: 'txCurrency02?',
-        transform: (value) => { return value; }
-      }, 'originalCurrency': {
-        key: 'txCurrency03?',
-        transform: (value) => { return value; }
-      }, 'overallAccountingCurrency': {
-        key: 'txCurrency04?',
-        transform: (value) => { return value; }
-      }, 'txCurrency05': {
-        key: 'txCurrency05?',
-        transform: (value) => { return value; }
-      }, 'eventDate': {
-        key: 'txDate01?',
-        transform: (value) => { return value; }
-      }, 'txDate02': {
-        key: 'txDate02?',
-        transform: (value) => { return value; }
-      }, 'txDate03': {
-        key: 'txDate03?',
-        transform: (value) => { return value; }
-      }, 'txDate04': {
-        key: 'txDate04?',
-        transform: (value) => { return value; }
-      }, 'txDate05': {
-        key: 'txDate05?',
-        transform: (value) => { return value; }
-      }, 'txLine': {
-        key: 'txLine?',
-        transform: (value) => { return value; }
-      }, 'txSeq': {
-        key: 'txSeq?',
-        transform: (value) => { return value; }
-      }, 'GLAccountName': {
-        key: 'txAcCode01?',
-        transform: (value) => { return value; }
-      }, 'txAcCode02': {
-        key: 'txAcCode02?',
-        transform: (value) => { return value; }
-      }, 'txAcCode03': {
-        key: 'txAcCode03?',
-        transform: (value) => { return value; }
-      }, 'txAcCode04': {
-        key: 'txAcCode04?',
-        transform: (value) => { return value; }
-      }, 'txAcCode05': {
-        key: 'txAcCode05?',
-        transform: (value) => { return value; }
-      }, 'txAcCode06': {
-        key: 'txAcCode06?',
-        transform: (value) => { return value; }
-      }, 'txAcCode07': {
-        key: 'txAcCode07?',
-        transform: (value) => { return value; }
-      }, 'txAcCode08': {
-        key: 'txAcCode08?',
-        transform: (value) => { return value; }
-      }, 'txAcCode09': {
-        key: 'txAcCode09?',
-        transform: (value) => { return value; }
-      }, 'txAcCode10': {
-        key: 'txAcCode10?',
-        transform: (value) => { return value; }
-      }
-      , 'accountAmount': {
-        key: 'txValue01?',
-        transform: (value) => { return value; }
-      }, 'txValue02': {
-        key: 'txValue02?',
-        transform: (value) => { return value; }
-      }, 'postedAmount': {
-        key: 'txValue03?',
-        transform: (value) => { return value; }
-      }, 'overallAmount': {
-        key: 'txValue04?',
-        transform: (value) => { return value; }
-      }, 'txValue05': {
-        key: 'txValue05?',
-        transform: (value) => { return value; }
-      }, 'txValue06': {
-        key: 'txValue06?',
-        transform: (value) => { return value; }
-      }, 'txValue07': {
-        key: 'txValue07?',
-        transform: (value) => { return value; }
-      }, 'txValue08': {
-        key: 'txValue08?',
-        transform: (value) => { return value; }
-      }, 'txValue09': {
-        key: 'txValue09?',
-        transform: (value) => { return value; }
-      }, 'txValue10': {
-        key: 'txValue10?',
-        transform: (value) => { return value; }
-      }, 'txValue11': {
-        key: 'txValue11?',
-        transform: (value) => { return value; }
-      }, 'txValue12': {
-        key: 'txValue12?',
-        transform: (value) => { return value; }
-      }, 'txValue13': {
-        key: 'txValue13?',
-        transform: (value) => { return value; }
-      }, 'txValue14': {
-        key: 'txValue14?',
-        transform: (value) => { return value; }
-      }, 'txValue15': {
-        key: 'txValue15?',
-        transform: (value) => { return value; }
-      }, 'txQty01': {
-        key: 'txQty01?',
-        transform: (value) => { return value; }
-      }, 'txQty02': {
-        key: 'txQty02?',
-        transform: (value) => { return value; }
-      }, 'txQty03': {
-        key: 'txQty03?',
-        transform: (value) => { return value; }
-      }, 'txQty04': {
-        key: 'txQty04?',
-        transform: (value) => { return value; }
-      }, 'txQty05': {
-        key: 'txQty05?',
-        transform: (value) => { return value; }
-      }, 'txQty06': {
-        key: 'txQty06?',
-        transform: (value) => { return value; }
-      }, 'txQty07': {
-        key: 'txQty07?',
-        transform: (value) => { return value; }
-      }, 'txQty08': {
-        key: 'txQty08?',
-        transform: (value) => { return value; }
-      }, 'txQty09': {
-        key: 'txQty09?',
-        transform: (value) => { return value; }
-      }, 'txQty10': {
-        key: 'txQty10?',
-        transform: (value) => { return value; }
-      }, 'accountFXRate': {
-        key: 'txXRate01?',
-        transform: (value) => { return value; }
-      }, 'txXRate02': {
-        key: 'txXRate02?',
-        transform: (value) => { return value; }
-      }, 'txXRate03': {
-        key: 'txXRate03?',
-        transform: (value) => { return value; }
-      }, 'overallFXRate': {
-        key: 'txXRate04?',
-        transform: (value) => { return value; }
-      }, 'txXRate05': {
-        key: 'txXRate05?',
-        transform: (value) => { return value; }
-      }, 'txTaxCode01': {
-        key: 'txTaxCode01?',
-        transform: (value) => { return value; }
-      }, 'txTaxCode02': {
-        key: 'txTaxCode02?',
-        transform: (value) => { return value; }
-      }, 'txTaxCode03': {
-        key: 'txTaxCode03?',
-        transform: (value) => { return value; }
-      }, 'txTaxCode04': {
-        key: 'txTaxCode04?',
-        transform: (value) => { return value; }
-      }, 'txTaxCode05': {
-        key: 'txTaxCode05?',
-        transform: (value) => { return value; }
-      }, 'transactionReference': {
-        key: 'txRef01?',
-        transform: (value) => { return value; }
-      }, 'bookCode': {
-        key: 'txRef02?',
-        transform: (value) => { return value; }
-      }, 'postingAccountName': {
-        key: 'txRef03?',
-        transform: (value) => { return value; }
-      }, 'MIDASreference': {
-        key: 'txRef04?',
-        transform: (value) => { return value; }
-      }, 'txRef05': {
-        key: 'txRef05?',
-        transform: (value) => { return value; }
-      }, 'txRef06': {
-        key: 'txRef06?',
-        transform: (value) => { return value; }
-      }, 'txRef07': {
-        key: 'txRef07?',
-        transform: (value) => { return value; }
-      }, 'txRef08': {
-        key: 'txRef08?',
-        transform: (value) => { return value; }
-      }, 'txRef09': {
-        key: 'txRef09?',
-        transform: (value) => { return value; }
-      }, 'txRef10': {
-        key: 'txRef10?',
-        transform: (value) => { return value; }
-      }, 'transactionCounterparty': {
-        key: 'txDesc01?',
-        transform: (value) => { return value; }
-      }, 'txDesc02': {
-        key: 'txDesc02?',
-        transform: (value) => { return value; }
-      }, 'txDesc03': {
-        key: 'txDesc03?',
-        transform: (value) => { return value; }
-      }, 'txInfo01': {
-        key: 'txInfo01?',
-        transform: (value) => { return value; }
-      }, 'txInfo02': {
-        key: 'txInfo02?',
-        transform: (value) => { return value; }
-      }, 'txInfo03': {
-        key: 'txInfo03?',
-        transform: (value) => { return value; }
-      }, 'txInfo03': {
-        key: 'txInfo04?',
-        transform: (value) => { return value; }
-      }, 'txInfo05': {
-        key: 'txInfo05?',
-        transform: (value) => { return value; }
-      }, 'txFlag01': {
-        key: 'txFlag01?',
-        transform: (value) => { return value; }
-      }, 'txFlag02': {
-        key: 'txFlag02?',
-        transform: (value) => { return value; }
-      }, 'txFlag03': {
-        key: 'txFlag03?',
-        transform: (value) => { return value; }
-      }, 'txFlag04': {
-        key: 'txFlag04?',
-        transform: (value) => { return value; }
-      }, 'txFlag05': {
-        key: 'txFlag05?',
-        transform: (value) => { return value; }
-      }, 'ledgerAccountName': {
-        key: 'txComment01?',
-        transform: (value) => { return value; }
-      }, 'txComment02': {
-        key: 'txComment02?',
-        transform: (value) => { return value; }
-      }, 'fileNameOnly': {
-        key: 'txComment03?',
-        transform: (value) => { return value; }
-      }, 'txComment04': {
-        key: 'txComment04?',
-        transform: (value) => { return value; }
-      }, 'txComment05': {
-        key: 'txComment05',
-        transform: (value) => { return value; }
-      }
-
+      ], 'ledgerAccountCurrencyCode': 'txCurrency01?',
+      'txCurrency02': 'txCurrency02?',
+      'originalCurrency': 'txCurrency03?',
+      'overallAccountingCurrency': 'txCurrency04?',
+      'txCurrency05': 'txCurrency05?',
+      'eventDate': 'txDate01?',
+      'txDate02': 'txDate02?',
+      'txDate03': 'txDate03?',
+      'txDate04': 'txDate04?',
+      'txDate05': 'txDate05?',
+      'txLine': 'txLine?',
+      'txSeq': 'txSeq?',
+      'GLAccountName': 'txAcCode01?',
+      'txAcCode02': 'txAcCode02?',
+      'txAcCode03': 'txAcCode03?',
+      'txAcCode04': 'txAcCode04?',
+      'txAcCode05': 'txAcCode05?',
+      'txAcCode06': 'txAcCode06?',
+      'txAcCode07': 'txAcCode07?',
+      'txAcCode08': 'txAcCode08?',
+      'txAcCode09': 'txAcCode09?',
+      'txAcCode10': 'txAcCode10?',
+      'accountAmount': 'txValue01?',
+      'txValue02': 'txValue02?',
+      'postedAmount': 'txValue03?',
+      'overallAmount': 'txValue04?',
+      'txValue05': 'txValue05?',
+      'txValue06': 'txValue06?',
+      'txValue07': 'txValue07?',
+      'txValue08': 'txValue08?',
+      'txValue09': 'txValue09?',
+      'txValue10': 'txValue10?',
+      'txValue11': 'txValue11?',
+      'txValue12': 'txValue12?',
+      'txValue13': 'txValue13?',
+      'txValue14': 'txValue14?',
+      'txValue15': 'txValue15?',
+      'txQty01': 'txQty01?',
+      'txQty02': 'txQty02?',
+      'txQty03': 'txQty03?',
+      'txQty04': 'txQty04?',
+      'txQty05': 'txQty05?',
+      'txQty06': 'txQty06?',
+      'txQty07': 'txQty07?',
+      'txQty08': 'txQty08?',
+      'txQty09': 'txQty09?',
+      'txQty10': 'txQty10?',
+      'accountFXRate': 'txXRate01?',
+      'txXRate02': 'txXRate02?',
+      'txXRate03': 'txXRate03?',
+      'overallFXRate': 'txXRate04?',
+      'txXRate05': 'txXRate05?',
+      'txTaxCode01': 'txTaxCode01?',
+      'txTaxCode02': 'txTaxCode02?',
+      'txTaxCode03': 'txTaxCode03?',
+      'txTaxCode04': 'txTaxCode04?',
+      'txTaxCode05': 'txTaxCode05?',
+      'transactionReference': 'txRef01?',
+      'bookCode': 'txRef02?',
+      'postingAccountName': 'txRef03?',
+      'MIDASreference': 'txRef04?',
+      'txRef05': 'txRef05?',
+      'txRef06': 'txRef06?',
+      'txRef07': 'txRef07?',
+      'txRef08': 'txRef08?',
+      'txRef09': 'txRef09?',
+      'txRef10': 'txRef10?',
+      'transactionCounterparty': 'txDesc01?',
+      'txDesc02': 'txDesc02?',
+      'txDesc03': 'txDesc03?',
+      'txInfo01': 'txInfo01?',
+      'txInfo02': 'txInfo02?',
+      'txInfo03': 'txInfo03?',
+      'txInfo03': 'txInfo04?',
+      'txInfo05': 'txInfo05?',
+      'txFlag01': 'txFlag01?',
+      'txFlag02': 'txFlag02?',
+      'txFlag03': 'txFlag03?',
+      'txFlag04': 'txFlag04?',
+      'txFlag05': 'txFlag05?',
+      'ledgerAccountName': 'txComment01?',
+      'txComment02': 'txComment02?',
+      'fileNameOnly': 'txComment03?',
+      'txComment04': 'txComment04?',
+      'txComment05': 'txComment05'
     }
     return map;
   }
