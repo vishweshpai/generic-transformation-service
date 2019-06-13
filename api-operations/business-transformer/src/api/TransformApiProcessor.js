@@ -17,11 +17,10 @@ class TransformApiProcessor {
             const requestDto = new RequestDto(event.data, event.transformers, event.jobDetails, event.traceFields);
             const requestBo = await BoDtoTransformer.transformToBo(requestDto);
             const responseBo = await transformerService.process(requestBo);
-            const responseDto = await BoDtoTransformer.transformToDto(responseBo);
-            //logger.info(responseDto.status)
-            return responseDto.toJson();
+            return await BoDtoTransformer.transformToDto(responseBo);
+
         } catch (exception) {
-            console.log('Error', exception);
+            console.error(exception);
             //logger.error(`Error occurred:  ${exception.message}`);
             if (!(exception instanceof GenericException)) {
                 throw new GenericException.Builder(ExceptionType.UNKNOWN_ERROR)

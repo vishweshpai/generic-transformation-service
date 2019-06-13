@@ -17,7 +17,7 @@ class RequestResponseTransformer {
     }
 
     static async transformToDto(responseBo) {
-        return new ResponseDto(responseBo.response.status, responseBo.response.message, responseBo.response.data);
+        return new ResponseDto(responseBo.response.status, responseBo.response.message, responseBo.response.data).toJson();
     }
 }
 
