@@ -4,18 +4,16 @@
   "description": "utilities required for component test",
   "main": "",
   "dependencies": {
-    "request": "^2.88.0",
     "chai": "^4.2.0",
+    "jest": "^24.8.0",
     "mocha": "^6.0.2",
-    "mochawesome": "^3.1.1"
+    "mochawesome": "^3.1.1",
+    "request": "^2.88.0"
   },
   "scripts": {
     "component-test-execute": "mocha ./component-test/*.js --reporter mochawesome --reporter-options reportDir=./component-test-results,reportFilename=component-test-report.html,code=false,autoOpen=false",
     "test": "jest"
   },
   "author": "Pravin Surve",
-  "license": "ISC",
-  "devDependencies": {
-    "jest": "^24.8.0"
-  }
+  "license": "ISC"
 }

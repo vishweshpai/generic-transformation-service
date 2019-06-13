@@ -76,4 +76,5 @@ function generateError(errorMessages) {
         .withInspectionFields()
         .build();
 }
+
 module.exports = BaseTransformer;
