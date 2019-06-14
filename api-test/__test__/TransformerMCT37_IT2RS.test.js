@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-var api = require("../utils/CommonApiMethods");
+var api = require("../utils/CommonApiMethods"); 
 var config = require("../config")
 var transformurl = config.baseUrl + config.transformer;
 var _headers = { "content-type": "application/json" }

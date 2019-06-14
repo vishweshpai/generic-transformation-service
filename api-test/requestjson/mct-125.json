@@ -1,0 +1,41 @@
+{
+    "data": {
+        "Nominal": "1311119GBP",
+        "firstAccount": "GBP",
+        "secondAccount": "1016",
+        "docCurr": "GBP",
+        "docValue": "-2000",
+        "nominalValue": "-2000",
+        "accountValue": "-2000",
+        "homeValue": "-2000",
+        "docType": "OI",
+        "docNo": "15948201",
+        "Year": "2015",
+        "Period": "08",
+        "docDate": "27/8/15",
+        "description": " G4S ",
+        "userField1": "159482",
+        "userField2": "BHX SITE NUMBER 731",
+        "userField3": "Notes"
+    },
+    "transformers": [
+        "transfomer-01.js"
+    ],
+    "jobDetails": {
+        "bucketName": "tvx-middleware-dev",
+        "domain": "finance",
+        "interfaceName": "ocs",
+        "jobName": "ocs-to-coda",
+        "fileName": "orders28052018-160312.csv"
+    },
+    "traceFields": [
+        {
+            "name": "totalRecords",
+            "value": "100"
+        },
+        {
+            "name": "recordNumber",
+            "value": "2"
+        }
+    ]
+}
