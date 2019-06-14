@@ -1,0 +1,26 @@
+{
+    "data": {
+      "currency": "AED",
+      "rate": 6.0994
+    },
+    "transformers": [
+      "transfomer-01.js"
+    ],
+    "jobDetails": {
+      "bucketName": "tvx-middleware-dev",
+      "domain": "finance",
+      "interfaceName": "fx-rates",
+      "jobName": "fx-rates",
+      "fileName": "orders28052018-160312.csv"
+    },
+    "traceFields": [
+      {
+        "name": "totalRecords",
+        "value": "100"
+      },
+      {
+        "name": "recordNumber",
+        "value": "2"
+      }
+    ]
+  }
