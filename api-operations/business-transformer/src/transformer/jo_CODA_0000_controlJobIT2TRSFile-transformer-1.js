@@ -3,7 +3,7 @@ const objectMapper = require('object-mapper');
 const BaseTransformer = require('../transformer/BaseTransformer');
 
 const Messages = {
-  'INVALID_ACCOUNTINGPERIODCODE': "Invalid Accountingperiodcode",
+  'INVALID_ACCOUNTINGPERIODCODE': "Invalid accountingPeriodCode"
 }
 
 class IT2RSDataTransformer extends BaseTransformer {
@@ -44,32 +44,44 @@ class IT2RSDataTransformer extends BaseTransformer {
           key: 'txYear',
           transform: (value) => {
             try {
-              let accountingPeriodCode = parseInt(value);
-              if (!accountingPeriodCode) {
-                this.addErrorMessage(`Key: txYear, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
+              let accountingPeriodCode = null;
+              if (value != null) {
+                accountingPeriodCode = parseInt(value / 100);
+                if (!accountingPeriodCode) {
+                  this.addErrorMessage(`Key: accountingPeriodCode, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
+                } else {
+                  return accountingPeriodCode;
+                }
+              } else {
+                return value;
               }
-              else {
-                return value == null ? null : (accountingPeriodCode / 100);
-              }
+
             } catch (ex) {
               console.log(ex.message);
-              this.addErrorMessage(`Key: txYear, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
+              this.addErrorMessage(`Key: accountingPeriodCode, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
             }
           }
         }, {
           key: 'txPeriod',
           transform: (value) => {
             try {
-              let accountingPeriodCode = parseInt(value);
-              if (!accountingPeriodCode) {
-                this.addErrorMessage(`Key: txYear, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
+              let accountingPeriodCode = null;
+              if (value != null) {
+                accountingPeriodCode = parseInt(value % 100);
+                if (!accountingPeriodCode) {
+                  this.addErrorMessage(`Key: accountingPeriodCode, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
+                } else {
+                  return accountingPeriodCode;
+                }
               } else {
-                return value == null ? null : (accountingPeriodCode % 100);
+                return value;
               }
+
             } catch (ex) {
               console.log(ex.message);
-              this.addErrorMessage(`Key: txYear, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
+              this.addErrorMessage(`Key: accountingPeriodCode, ${Messages.INVALID_ACCOUNTINGPERIODCODE}`)
             }
+
           }
         }
       ], 'ledgerAccountCurrencyCode': 'txCurrency01?',

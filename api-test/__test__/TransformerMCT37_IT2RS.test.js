@@ -22,6 +22,7 @@ describe('To verify if the input json is correctly transformed to the output jso
         var res;
 		
         res = await api.POST(transformurl, _headers, _body_it2trs);
+        //console.log(res);
         	
         verifyValue("journalReference",_body_it2trs.data.journalReference, res.body.data.txNo01);
         verifyValue("journalAccountCompany",_body_it2trs.data.journalAccountCompany, res.body.data.company);
